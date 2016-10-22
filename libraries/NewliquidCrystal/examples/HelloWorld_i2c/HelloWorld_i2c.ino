@@ -1,3 +1,7 @@
+#include <I2CIO.h>
+#include <LCD.h>
+#include <LiquidCrystal_I2C.h>
+
 /* YourDuino.com Example Software Sketch
  16 character 2 line I2C Display
  Backpack Interface labelled "A0 A1 A2" at lower right.
@@ -74,6 +78,17 @@ void loop()   /*----( LOOP: RUNS CONSTANTLY )----*/
       // read all the available characters
       while (Serial.available() > 0) {
         // display each character to the LCD
+        char *txt = Serial.read();
+        if (strlen(txt) > 16) {
+          lcd.setCursor(0,0);
+          for (int i = 0; i < 16; i++) {
+            lcd.write(txt[i]);
+          }
+          lcd.setCursor(0,1);
+          for (int i = 16; i < strlen(txt); i++) {
+            lcd.write(txt[i]);
+          }
+        }
         lcd.write(Serial.read());
       }
     }
