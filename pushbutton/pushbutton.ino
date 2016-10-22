@@ -8,6 +8,7 @@
 void setup() {
   pinMode(13, OUTPUT);
   pinMode(12, INPUT);
+  pinMode(8, OUTPUT);
 }
 
 void loop() {
@@ -16,11 +17,14 @@ void loop() {
 
   if(digitalRead(12) == HIGH) {
     digitalWrite(13, HIGH);
-    delay(200);
+    digitalWrite(8, LOW);
+    delay(1500);
     digitalWrite(13, LOW);
-    delay(200);
+    digitalWrite(8, HIGH);
+    delay(500);
   } else {
     digitalWrite(13, LOW);
+    digitalWrite(8, LOW);
   }
   
 }
